@@ -24,7 +24,10 @@ namespace chat_cl
 
         public void Disconnect(int idClient)
         {
-            throw new NotImplementedException();
+            var client = clients.FirstOrDefault(i => i.Id == idClient);
+            if (client == null) return;
+            clients.Remove(client);
+            SendInfo(client.Name + " disconnect from chat!");
         }
 
         public void SendInfo(string context)
