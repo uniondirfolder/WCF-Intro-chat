@@ -17,7 +17,7 @@ namespace chat_cl
         {
             EntityUser client = new EntityUser(_nextId, nameClient, OperationContext.Current);
             _nextId++;
-            SendInfo(client.Name + " connect to chat!", 0);
+            SendInfo(": " + client.Name + " connect to chat!", 0);
             _clients.Add(client);
             return client.Id;
         }
@@ -27,7 +27,7 @@ namespace chat_cl
             var client = _clients.FirstOrDefault(i => i.Id == idClient);
             if (client == null) return;
             _clients.Remove(client);
-            SendInfo(client.Name + " disconnect from chat!", 0);
+            SendInfo(": " + client.Name + " disconnect from chat!", 0);
         }
 
         public void SendInfo(string context, int clientId)

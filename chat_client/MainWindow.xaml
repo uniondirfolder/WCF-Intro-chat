@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:chat_client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
-        
+        <Button x:Name="BtnStartStop" Content="Connect" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="149" Height="29" Click="Button_Click"/>
+        <TextBox x:Name="TxbNameClient" HorizontalAlignment="Left" Height="29" Margin="178,10,0,0" TextWrapping="Wrap" Text="Name User" VerticalAlignment="Top" Width="592"/>
+        <ListBox x:Name="LbxAllChat" HorizontalAlignment="Left" Height="244" Margin="10,44,0,0" VerticalAlignment="Top" Width="760"/>
+        <TextBox x:Name="TxbSendMsg" HorizontalAlignment="Left" Height="116" Margin="10,293,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="760" KeyDown="TxbSendMsg_KeyDown"/>
+
     </Grid>
 </Window>

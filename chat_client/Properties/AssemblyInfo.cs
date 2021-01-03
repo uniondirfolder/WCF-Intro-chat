@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("chat_client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Vadym Narchuk")]
 [assembly: AssemblyProduct("chat_client")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
