@@ -8,7 +8,7 @@ using System.Text;
 namespace chat_cl
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IServiceChat" in both code and config file together.
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(IServerChatCallback))]
     public interface IServiceChat
     {
         [OperationContract]
@@ -23,6 +23,7 @@ namespace chat_cl
 
     public interface IServerChatCallback
     {
-        void InfoCallback();
+        [OperationContract]
+        void InfoCallback(string context);
     }
 }
