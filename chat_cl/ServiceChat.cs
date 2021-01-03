@@ -11,28 +11,39 @@ namespace chat_cl
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class ServiceChat : IServiceChat
     {
-        private List<EntityUser> clients = new List<EntityUser>();
-        private int nextId = 1;
+        private List<EntityUser> _clients = new();
+        private int _nextId = 1;
         public int Connect(string nameClient)
         {
-            EntityUser client = new EntityUser(nextId, nameClient, OperationContext.Current);
-            nextId++;
-            SendInfo(client.Name + " connect to chat!");
-            clients.Add(client);
+            EntityUser client = new EntityUser(_nextId, nameClient, OperationContext.Current);
+            _nextId++;
+            SendInfo(client.Name + " connect to chat!", 0);
+            _clients.Add(client);
             return client.Id;
         }
 
         public void Disconnect(int idClient)
         {
-            var client = clients.FirstOrDefault(i => i.Id == idClient);
+            var client = _clients.FirstOrDefault(i => i.Id == idClient);
             if (client == null) return;
-            clients.Remove(client);
-            SendInfo(client.Name + " disconnect from chat!");
+            _clients.Remove(client);
+            SendInfo(client.Name + " disconnect from chat!", 0);
         }
 
-        public void SendInfo(string context)
+        public void SendInfo(string context, int clientId)
         {
-            throw new NotImplementedException();
+            foreach (var client in _clients)
+            {
+                string answer = DateTime.Now.ToShortTimeString();
+                var user = _clients.FirstOrDefault(i => i.Id == clientId);//если кон. или диск. сообщ уже готово
+                if (user != null)
+                {
+                    answer += ": " + user.Name + " ";
+                }
+
+                answer += context;
+                client.OperationContext.GetCallbackChannel<IServerChatCallback>().InfoCallback(answer);
+            }
         }
     }
 }

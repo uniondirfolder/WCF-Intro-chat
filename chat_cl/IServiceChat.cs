@@ -18,12 +18,13 @@ namespace chat_cl
         void Disconnect(int idClient);
 
         [OperationContract(IsOneWay = true)]
-        void SendInfo(string context);
+        void SendInfo(string context, int clientId);
     }
 
+    [ServiceContract]
     public interface IServerChatCallback
     {
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void InfoCallback(string context);
     }
 }
