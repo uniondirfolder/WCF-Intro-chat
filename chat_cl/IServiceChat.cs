@@ -12,7 +12,7 @@ namespace chat_cl
     public interface IServiceChat
     {
         [OperationContract]
-        int Connect();
+        int Connect(string nameClient);
 
         [OperationContract]
         void Disconnect(int idClient);

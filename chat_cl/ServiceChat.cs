@@ -8,12 +8,18 @@ using System.Text;
 namespace chat_cl
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ServiceChat" in both code and config file together.
-   [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class ServiceChat : IServiceChat
     {
-        public int Connect()
+        private List<EntityUser> clients = new List<EntityUser>();
+        private int nextId = 1;
+        public int Connect(string nameClient)
         {
-            throw new NotImplementedException();
+            EntityUser client = new EntityUser(nextId, nameClient, OperationContext.Current);
+            nextId++;
+            SendInfo(client.Name + " connect to chat!");
+            clients.Add(client);
+            return client.Id;
         }
 
         public void Disconnect(int idClient)
